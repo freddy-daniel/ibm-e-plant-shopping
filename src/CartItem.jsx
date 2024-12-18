@@ -21,7 +21,7 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleContinueShopping = (e) => {
    
-    onContinueShopping();
+    onContinueShopping(e);
   };
 
   const handleCheckoutShopping = (e) => {
@@ -32,17 +32,18 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleIncrement = (item) => {
     const { name, quantity } = item;
-    dispatch(updateQuantity({ name, quantity: quantity + 1 }));
+    const updatedItem = { name, quantity: quantity + 1 };
+    dispatch(updateQuantity(updatedItem));
   };
 
   const handleDecrement = (item) => {
-    const { name, quantity } = item
+    const { name, quantity } = item;
+    const updatedItem = { name, quantity: quantity - 1 }
     if (quantity === 1) {
       dispatch(removeItem(item.name));
       return;
     }
-    dispatch(updateQuantity({ name, quantity: quantity - 1 }));
-   
+    dispatch(updateQuantity(updatedItem));
   };
 
   const handleRemove = (item) => {
